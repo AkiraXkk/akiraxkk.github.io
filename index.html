@@ -45,21 +45,38 @@
             transform: scale(1);
         }
 
+        .cloud-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden; /* Garante que as nuvens saiam da tela discretamente */
+        }
+
         .cloud {
             position: absolute;
             background-color: #FFFFFF;
             border-radius: 50px;
             opacity: 0.8;
-            transition: all 0.6s ease;
+            transition: opacity 0.6s ease, transform 0.6s ease;
             transform: scale(1);
+            animation: moveClouds 60s linear infinite; /* Animação de movimento */
         }
 
-        /* Criando formas de nuvens */
+        /* Animação para mover as nuvens */
+        @keyframes moveClouds {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-150%); } /* Ajustado para saírem completamente da tela */
+        }
+
+        /* Ajustando as posições iniciais das nuvens */
         #cloud1 {
             top: 20%;
-            left: 15%;
+            left: 10%; /* Posição inicial */
             width: 180px;
             height: 60px;
+            animation-delay: 0s; /* Começa imediatamente */
         }
         #cloud1::before, #cloud1::after {
             content: '';
@@ -75,18 +92,40 @@
         }
 
         #cloud2 {
-            top: 30%;
-            right: 20%;
-            width: 120px;
-            height: 40px;
+            top: 35%;
+            left: 50%; /* Posição inicial */
+            width: 150px;
+            height: 50px;
+            animation-delay: -30s; /* Começa na metade do ciclo da animação */
         }
         #cloud2::before {
             content: '';
             position: absolute;
             background-color: #FFFFFF;
             border-radius: 50%;
-            width: 70px; height: 70px; top: -30px; left: 20px;
+            width: 80px; height: 80px; top: -35px; left: 25px;
         }
+
+        #cloud3 {
+            top: 15%;
+            left: 80%; /* Posição inicial */
+            width: 200px;
+            height: 70px;
+            animation-delay: -15s; /* Começa em outro ponto do ciclo */
+        }
+        #cloud3::before, #cloud3::after {
+            content: '';
+            position: absolute;
+            background-color: #FFFFFF;
+            border-radius: 50%;
+        }
+        #cloud3::before {
+            width: 100px; height: 100px; top: -45px; left: 40px;
+        }
+        #cloud3::after {
+            width: 130px; height: 130px; top: -60px; right: 30px;
+        }
+
 
         /* --- MODO ESCURO (DARK MODE) --- */
         
@@ -103,38 +142,54 @@
         }
 
         /* Estrelas (usando box-shadow para criar múltiplas estrelas) */
-        #stars {
-            width: 1px;
-            height: 1px;
+        #stars-container {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            background: transparent;
-            /* Gera 100 estrelas pequenas aleatoriamente */
-            box-shadow: 
-                /* Gerador de box-shadow aleatório (exemplo) */
-                150px 300px #fff, -200px 100px #fff, 300px -150px #fff,
-                -400px -250px #fff, 500px 50px #fff, -350px 200px #fff,
-                600px -300px #fff, -500px -100px #fff, 700px 150px #fff,
-                -650px -50px #fff, 800px 250px #fff, -750px -150px #fff,
-                /* ... (mais estrelas) ... */
-                900px 0px #fff, -900px 100px #fff, 1000px 200px #fff,
-                -1000px -200px #fff, 1200px 300px #fff, -1200px -300px #fff;
-            
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Garante que as estrelas fiquem dentro da tela */
             opacity: 0;
             transition: opacity 0.6s ease;
         }
-        
-        /* Animação de brilho (piscar) */
-        @keyframes twinkle {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { opacity: 0.5; }
+
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            opacity: 0; /* Começam invisíveis */
+            animation: twinkle 3s infinite alternate ease-in-out;
         }
 
-        body.dark-mode #stars {
+        /* Animação de brilho (piscar) */
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0.3; transform: scale(0.8); }
+        }
+
+        body.dark-mode #stars-container {
             opacity: 1;
-            animation: twinkle 3s infinite;
+        }
+
+        /* Lua */
+        #moon {
+            position: absolute;
+            top: 8%;
+            right: 10%;
+            width: 90px;
+            height: 90px;
+            background-color: #F0F0F0; /* Cor da lua */
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(240, 240, 240, 0.5); /* Brilho da lua */
+            transition: all 0.6s ease;
+            opacity: 0; /* Começa invisível */
+            transform: scale(0);
+        }
+
+        body.dark-mode #moon {
+            opacity: 1;
+            transform: scale(1);
         }
 
 
@@ -156,6 +211,7 @@
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
+            z-index: 10; /* Garante que o botão esteja acima de tudo */
         }
 
         #theme-toggle:hover {
@@ -180,7 +236,7 @@
             text-decoration: none;
             opacity: 0.6;
             transition: all 0.3s ease;
-            z-index: 10;
+            z-index: 10; /* Garante que a marca d'água esteja acima de tudo */
         }
 
         .watermark:hover {
@@ -196,24 +252,42 @@
 </head>
 <body>
 
-    <!-- Os elementos visuais do fundo -->
-    <div id="scene">
-        <!-- Modo Claro -->
-        <div id="sun"></div>
-        <div class="cloud" id="cloud1"></div>
-        <div class="cloud" id="cloud2"></div>
+    <!-- Os elementos visuais do fundo --><div id="scene">
+        <!-- Modo Claro --><div id="sun"></div>
+        <div class="cloud-container">
+            <div class="cloud" id="cloud1"></div>
+            <div class="cloud" id="cloud2"></div>
+            <div class="cloud" id="cloud3"></div>
+        </div>
 
-        <!-- Modo Escuro -->
-        <div id="stars"></div>
-    </div>
+        <!-- Modo Escuro --><div id="moon"></div>
+        <div id="stars-container"></div> <!-- Container para as estrelas dinâmicas --></div>
 
-    <!-- O botão de controle -->
-    <button id="theme-toggle">Apagar</button>
+    <!-- O botão de controle --><button id="theme-toggle">Apagar</button>
 
     <script>
         // Pega o botão e o corpo (body) do documento
         const toggleButton = document.getElementById('theme-toggle');
         const body = document.body;
+        const starsContainer = document.getElementById('stars-container');
+
+        // Função para criar estrelas aleatoriamente
+        function createStars() {
+            const numStars = 100; // Número de estrelas
+            starsContainer.innerHTML = ''; // Limpa estrelas existentes
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = star.style.height = `${Math.random() * 3 + 1}px`; // Tamanho de 1px a 4px
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 3}s`; // Atraso para brilhos variados
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Cria as estrelas assim que a página carrega
+        createStars();
 
         // Adiciona um "ouvinte" para o evento de clique
         toggleButton.addEventListener('click', function() {
@@ -230,8 +304,7 @@
         });
     </script>
 
-    <!-- Marca d'água Clicável -->
-    <a href="https://www.instagram.com/ikyaki_/" target="_blank" class="watermark">
+    <!-- Marca d'água Clicável --><a href="https://www.instagram.com/ikyaki_/" target="_blank" class="watermark">
         Made by ikyaki_
     </a>
 
