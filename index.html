@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aluguel de Veículos - Ikyaki</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="app-container">
+        <div id="login-screen" class="screen active">
+            <header>
+                <h1>Bem-vindo(a)</h1>
+                <p>Aluguel de veículos sem burocracia.</p>
+            </header>
+            <main>
+                <form id="login-form">
+                    <div class="input-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" placeholder="********" required>
+                    </div>
+                    <button type="submit" class="btn primary">Entrar</button>
+                    <button type="button" class="btn secondary" onclick="showScreen('signup-screen')">Criar Conta</button>
+                </form>
+            </main>
+        </div>
+
+        <div id="signup-screen" class="screen">
+            <header>
+                <h1>Criar Nova Conta</h1>
+            </header>
+            <main>
+                <form id="signup-form">
+                    <div class="input-group">
+                        <label for="signup-name">Nome Completo</label>
+                        <input type="text" id="signup-name" placeholder="Seu nome" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="signup-email">E-mail</label>
+                        <input type="email" id="signup-email" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="signup-password">Senha</label>
+                        <input type="password" id="signup-password" placeholder="********" required>
+                    </div>
+                    <button type="submit" class="btn primary">Cadastrar</button>
+                    <button type="button" class="btn secondary" onclick="showScreen('login-screen')">Já tenho conta</button>
+                </form>
+            </main>
+        </div>
+
+        <div id="home-screen" class="screen">
+            <header>
+                <nav class="top-nav">
+                    <button class="nav-icon"><i class="fas fa-bars"></i></button>
+                    <span>Aluguel de Veículos</span>
+                    <button class="nav-icon"><i class="fas fa-user-circle"></i></button>
+                </nav>
+            </header>
+            <main>
+                <div class="section-title">
+                    <h2>Veículos Disponíveis</h2>
+                    <button class="btn-filter"><i class="fas fa-filter"></i> Filtrar</button>
+                </div>
+
+                <div class="vehicle-list">
+                    <div class="vehicle-card">
+                        <img src="https://via.placeholder.com/300x200/E30000/FFFFFF?text=SPORTBIKE" alt="Sportbike Pro">
+                        <h3>Sportbike Pro</h3>
+                        <p class="price">R$120 / dia</p>
+                        <div class="details">
+                            <span><i class="fas fa-gas-pump"></i> Gasolina</span>
+                            <span><i class="fas fa-cogs"></i> Manual</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Centro</span>
+                        </div>
+                        <button class="btn secondary" onclick="showScreen('vehicle-detail-screen')">Ver Detalhes</button>
+                    </div>
+                     <div class="vehicle-card">
+                        <img src="https://via.placeholder.com/300x200/E30000/FFFFFF?text=URBAN+SCOOTER" alt="Urban Scooter">
+                        <h3>Urban Scooter</h3>
+                        <p class="price">R$80 / dia</p>
+                        <div class="details">
+                            <span><i class="fas fa-gas-pump"></i> Elétrica</span>
+                            <span><i class="fas fa-cogs"></i> Automática</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Zona Sul</span>
+                        </div>
+                        <button class="btn secondary" onclick="showScreen('vehicle-detail-screen')">Ver Detalhes</button>
+                    </div>
+                    </div>
+            </main>
+            <nav class="bottom-nav">
+                <button class="nav-item active"><i class="fas fa-home"></i> Buscar</button>
+                <button class="nav-item" onclick="showScreen('my-trips-screen')"><i class="fas fa-car-alt"></i> Minhas Viagens</button>
+                <button class="nav-item" onclick="showScreen('profile-screen')"><i class="fas fa-user"></i> Perfil</button>
+                <button class="nav-item" onclick="showScreen('locator-panel-screen')"><i class="fas fa-briefcase"></i> Locador</button>
+            </nav>
+        </div>
+
+        <div id="vehicle-detail-screen" class="screen">
+            <header>
+                <nav class="top-nav">
+                    <button class="nav-icon" onclick="showScreen('home-screen')"><i class="fas fa-arrow-left"></i></button>
+                    <span>Detalhes do Veículo</span>
+                    <button class="nav-icon"><i class="fas fa-heart"></i></button>
+                </nav>
+            </header>
+            <main>
+                <img src="https://via.placeholder.com/600x400/E30000/FFFFFF?text=VEICULO+SELECIONADO" alt="Veículo Detalhado" class="detail-img">
+                <h2>Sportbike Pro</h2>
+                <p class="detail-description">Uma moto ágil e potente para suas aventuras urbanas ou de estrada. Inclui seguro básico.</p>
+                <div class="detail-specs">
+                    <span><i class="fas fa-tachometer-alt"></i> 250cc</span>
+                    <span><i class="fas fa-calendar-alt"></i> 2022</span>
+                    <span><i class="fas fa-map-pin"></i> 5km de você</span>
+                </div>
+                <div class="price-summary">
+                    <h3>Resumo do Preço</h3>
+                    <p>Aluguel (3 dias): R$360</p>
+                    <p>Taxa de Serviço: R$36</p>
+                    <p>Seguro: R$50</p>
+                    <p class="total-price">Total: R$446</p>
+                    <div class="caution">
+                        <i class="fas fa-info-circle"></i> Caução: R$500 (retido temporariamente)
+                    </div>
+                </div>
+                <button class="btn primary" onclick="showScreen('checkout-screen')">Reservar Agora</button>
+            </main>
+            <nav class="bottom-nav">
+                <button class="nav-item" onclick="showScreen('home-screen')"><i class="fas fa-home"></i> Buscar</button>
+                <button class="nav-item" onclick="showScreen('my-trips-screen')"><i class="fas fa-car-alt"></i> Minhas Viagens</button>
+                <button class="nav-item" onclick="showScreen('profile-screen')"><i class="fas fa-user"></i> Perfil</button>
+                 <button class="nav-item" onclick="showScreen('locator-panel-screen')"><i class="fas fa-briefcase"></i> Locador</button>
+            </nav>
+        </div>
+
+        <div id="checkout-screen" class="screen">
+            <header>
+                <nav class="top-nav">
+                    <button class="nav-icon" onclick="showScreen('vehicle-detail-screen')"><i class="fas fa-arrow-left"></i></button>
+                    <span>Checkout</span>
+                </nav>
+            </header>
+            <main>
+                <h2>Confirme sua Reserva</h2>
+                <div class="checkout-summary">
+                    <p>Veículo: Sportbike Pro</p>
+                    <p>Período: 20/07/2024 - 23/07/2024</p>
+                    <p>Total: <span class="price">R$446</span></p>
+                    <p class="caution-info"><i class="fas fa-exclamation-triangle"></i> Caução de R$500 será pré-autorizada</p>
+                </div>
+                <div class="input-group">
+                    <label for="card-number">Número do Cartão</label>
+                    <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX" required>
+                </div>
+                <div class="input-group">
+                    <label for="card-name">Nome no Cartão</label>
+                    <input type="text" id="card-name" placeholder="Seu Nome Completo" required>
+                </div>
+                <div class="input-group split">
+                    <div>
+                        <label for="expiry-date">Validade</label>
+                        <input type="text" id="expiry-date" placeholder="MM/AA" required>
+                    </div>
+                    <div>
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="123" required>
+                    </div>
+                </div>
+                <button class="btn primary">Finalizar Pagamento</button>
+            </main>
+            <nav class="bottom-nav">
+                <button class="nav-item" onclick="showScreen('home-screen')"><i class="fas fa-home"></i> Buscar</button>
+                <button class="nav-item" onclick="showScreen('my-trips-screen')"><i class="fas fa-car-alt"></i> Minhas Viagens</button>
+                <button class="nav-item" onclick="showScreen('profile-screen')"><i class="fas fa-user"></i> Perfil</button>
+                 <button class="nav-item" onclick="showScreen('locator-panel-screen')"><i class="fas fa-briefcase"></i> Locador</button>
+            </nav>
+        </div>
+
+
+        <div id="profile-screen" class="screen">
+            <header>
+                <nav class="top-nav">
+                    <button class="nav-icon" onclick="showScreen('home-screen')"><i class="fas fa-arrow-left"></i></button>
+                    <span>Meu Perfil</span>
+                </nav>
+            </header>
+            <main>
+                <div class="profile-header">
+                    <img src="https://via.placeholder.com/100x100/CCCCCC/888888?text=USER" alt="Avatar" class="avatar">
+                    <h3>Nome do Usuário</h3>
+                    <p>seu@email.com</p>
+                </div>
+                <ul class="profile-menu">
+                    <li><button onclick="showScreen('verification-screen')"><i class="fas fa-shield-alt"></i> Verificação de Documentos</button></li>
+                    <li><button><i class="fas fa-cog"></i> Configurações</button></li>
+                    <li><button><i class="fas fa-question-circle"></i> Ajuda</button></li>
+                    <li><button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Sair</button></li>
+                </ul>
+            </main>
+            <nav class="bottom-nav">
+                <button class="nav-item" onclick="showScreen('home-screen')"><i class="fas fa-home"></i> Buscar</button>
+                <button class="nav-item" onclick="showScreen('my-trips-screen')"><i class="fas fa-car-alt"></i> Minhas Viagens</button>
+                <button class="nav-item active"><i class="fas fa-user"></i> Perfil</button>
+                 <button class="nav-item" onclick="showScreen('locator-panel-screen')"><i class="fas fa-briefcase"></i> Locador</button>
+            </nav>
+        </div>
+
+         <div id="my-trips-screen" class="screen">
+            <header>
+                <nav class="top-nav">
+                    <button class="nav-icon" onclick="showScreen('home-screen')"><i class="fas fa-arrow-left"></i></button>
+                    <span>Minhas Viagens</span>
+                </nav>
+            </header>
+            <main>
+                <h2>Próximas Reservas</h2>
+                <div class="trip-card">
+                    <h3>Urban Scooter</h3>
+                    <p>De: 01/08/2024 Até: 05/08/2024</p>
+                    <p>Status: <span class="status-pending">Confirmada</span></p>
+                    <button class="btn secondary">Ver Detalhes</button>
+                </div>
+                <h2>Reservas Anteriores</h2>
+                 <div class="trip-card past">
+                    <h3>Sportbike Pro</h3>
+                    <p>De: 10/06/2024 Até: 12/06/2024</p>
+                    <p>Status: <span class="status-completed">Concluída</span></p>
+                    <button class="btn secondary">Avaliar</button>
+                </div>
+            </main>
+            <nav class="bottom-nav">
+                <button class="nav-item" onclick="showScreen('home-screen')"><i class="fas fa-home"></i> Buscar</button>
+                <button class="nav-item active"><i class="fas fa-car-alt"></i> Minhas Viagens</button>
+                <button class="nav-item" onclick="showScreen('profile-screen')"><i class="fas fa-user"></i> Perfil</button>
+                 <button class="nav-item" onclick="showScreen('locator-panel-screen')"><i class="fas fa-briefcase"></i> Locador</button>
+            </nav>
+        </div>
+
+
+        <div id="verification-screen" class="screen">
+            <header>
+                <nav class="top-nav">
+                    <button class="nav-icon" onclick="showScreen('profile-screen')"><i class="fas fa-arrow-left"></i></button>
+                    <span>Verificação Documentos</span>
+                </nav>
+            </header>
+            <main>
+                <div class="progress-bar">
+                    <span class="step active">1. Envio</span>
+                    <span class="step">2. Processamento</span>
+                    <span class="step">3. Revisão</span>
+                </div>
+
+                <div class="upload-area">
+                    <div class="upload-card">
+                        <i class="fas fa-id-card-alt"></i>
+                        <h3>Sua CNH</h3>
+                        <p>Frente e Verso da CNH e uma selfie sua segurando o documento.</p>
+                        <button class="btn primary">Fazer Upload</button>
+                    </div>
+                    <div class="upload-card">
+                        <i class="fas fa-file-alt"></i>
+                        <h3>Comprovante de Residência</h3>
+                        <p>Uma conta recente em seu nome ou nome dos pais.</p>
+                        <button class="btn primary">Upload</button>
+                    </div>
+                    <div class="upload-card" id="crlv-upload" style="display: none;">
+                        <i class="fas fa-motorcycle"></i>
+                        <h3>Documento do Veículo (CRLV)</h3>
+                        <p>Envie o documento do veículo que deseja alugar.</p>
+                        <button class="btn primary">Upload CRLV</button>
+                    </div>
+                </div>
+
+                <div class="alert-message">
+                    <i class="fas fa-exclamation-triangle"></i> Documentos em Análise. Você será notificado em breve.
+                </div>
+                <button class="btn primary wide">Concluir e Enviar</button>
+            </main>
+        </div>
+
+
+        <div id="locator-panel-screen" class="screen">
+            <header>
+                <nav class="top-nav">
+                    <button class="nav-icon" onclick="showScreen('home-screen')"><i class="fas fa-arrow-left"></i></button>
+                    <span>Painel do Locador</span>
+                    <button class="nav-icon"><i class="fas fa-plus"></i> Adicionar Veículo</button>
+                </nav>
+            </header>
+            <main>
+                <div class="dashboard-cards">
+                    <div class="dash-card primary">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>5</h3>
+                        <p>Reservas Pendentes</p>
+                    </div>
+                    <div class="dash-card secondary">
+                        <i class="fas fa-wallet"></i>
+                        <h3>R$ 2.500</h3>
+                        <p>Ganhos do Mês</p>
+                    </div>
+                </div>
+
+                <div class="section-title">
+                    <h2>Meus Veículos</h2>
+                    <button class="btn-text">Ver Todos</button>
+                </div>
+                <div class="vehicle-list-small">
+                     <div class="vehicle-card-small">
+                        <img src="https://via.placeholder.com/100x70/E30000/FFFFFF?text=SPORTBIKE" alt="Sportbike Pro">
+                        <div>
+                            <h3>Sportbike Pro</h3>
+                            <p>Placa: ABC-1234</p>
+                            <span class="status-active">Ativo</span>
+                        </div>
+                        <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                    </div>
+                     <div class="vehicle-card-small">
+                        <img src="https://via.placeholder.com/100x70/E30000/FFFFFF?text=URBAN" alt="Urban Scooter">
+                        <div>
+                            <h3>Urban Scooter</h3>
+                            <p>Placa: DEF-5678</p>
+                            <span class="status-active">Ativo</span>
+                        </div>
+                        <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                    </div>
+                </div>
+
+                <div class="section-title">
+                    <h2>Últimas Reservas</h2>
+                    <button class="btn-text">Ver Todas</button>
+                </div>
+                <div class="recent-bookings">
+                    <div class="booking-item">
+                        <span>Condutor A</span>
+                        <span>20/07 - 23/07</span>
+                        <span class="status-pending">Pendente</span>
+                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                    </div>
+                     <div class="booking-item">
+                        <span>Condutor B</span>
+                        <span>15/07 - 17/07</span>
+                        <span class="status-confirmed">Confirmada</span>
+                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+            </main>
+             <nav class="bottom-nav">
+                <button class="nav-item" onclick="showScreen('home-screen')"><i class="fas fa-home"></i> Buscar</button>
+                <button class="nav-item" onclick="showScreen('my-trips-screen')"><i class="fas fa-car-alt"></i> Minhas Viagens</button>
+                <button class="nav-item" onclick="showScreen('profile-screen')"><i class="fas fa-user"></i> Perfil</button>
+                 <button class="nav-item active"><i class="fas fa-briefcase"></i> Locador</button>
+            </nav>
+        </div>
+
+
+    </div>
+
+    <div id="attribution-tag">
+        Feito por <a href="https://www.instagram.com/ikyaki_/" target="_blank">ikyaki_</a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
