@@ -43,7 +43,6 @@ body {
     flex-direction: column;
     opacity: 0;
     transform: translateX(100%);
-    /* Transições fluidas para a navegação */
     transition: opacity 0.4s ease-out, transform 0.4s ease-out; 
     box-sizing: border-box;
     overflow-y: auto;
@@ -58,16 +57,35 @@ body {
     position: relative;
 }
 
+/* Centralização para Login e Cadastro (Mobile) */
+#login-screen,
+#signup-screen {
+    justify-content: center; /* Centraliza verticalmente o conteúdo (header + form) */
+    align-items: center; /* Centraliza horizontalmente o conteúdo */
+    padding-bottom: 0; /* Remove padding para não interferir na centralização vertical */
+}
+
 /* Main Content */
 main {
     padding: 20px;
     flex-grow: 1;
-    max-width: 1200px; /* Limite de largura para o PC */
+    max-width: 1200px;
     margin: 0 auto; 
 }
 
 /* Header */
 header {
+    background-color: var(--dark-surface);
+    border-bottom: 1px solid var(--border-color);
+    padding: 20px;
+    text-align: center;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
     background-color: var(--dark-surface);
     border-bottom: 1px solid var(--border-color);
 }
@@ -84,20 +102,6 @@ header p {
     margin-top: 5px;
 }
 
-.top-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background-color: var(--dark-surface);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.top-nav span {
-    font-weight: 600;
-    font-size: 1.1em;
-}
-
 .nav-icon {
     background: none;
     border: none;
@@ -106,11 +110,6 @@ header p {
     cursor: pointer;
     transition: color 0.2s ease;
 }
-
-.nav-icon:hover {
-    color: var(--primary-red);
-}
-
 
 /* Formulários e Inputs */
 form {
@@ -144,10 +143,6 @@ form {
 
 .input-group input:focus {
     border-color: var(--primary-red);
-}
-
-.input-group input::placeholder {
-    color: var(--text-secondary);
 }
 
 .input-group.split {
@@ -210,38 +205,6 @@ form {
     transition: background-color 0.2s ease;
 }
 
-.btn-filter:hover {
-    background-color: var(--dark-surface);
-}
-
-.btn-text {
-    background: none;
-    border: none;
-    color: var(--primary-red);
-    font-size: 0.9em;
-    cursor: pointer;
-    transition: color 0.2s ease;
-}
-
-.btn-text:hover {
-    color: #FF4444;
-}
-
-.btn-icon {
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: color 0.2s ease;
-}
-
-.btn-icon:hover {
-    color: var(--primary-red);
-}
-
-
-/* Seções e Listas */
 .section-title {
     display: flex;
     justify-content: space-between;
@@ -250,11 +213,7 @@ form {
     margin-top: 20px;
 }
 
-.section-title h2 {
-    font-size: 1.4em;
-    margin: 0;
-}
-
+/* Cards de Veículos */
 .vehicle-list {
     display: grid;
     gap: 20px;
@@ -318,7 +277,7 @@ form {
 }
 
 
-/* Detalhes do Veículo */
+/* Detalhes do Veículo e Resumo de Preços */
 .detail-img {
     width: 100%;
     height: 250px;
@@ -331,11 +290,6 @@ form {
     margin-top: 0;
     font-size: 1.8em;
     color: var(--primary-red);
-}
-
-.detail-description {
-    color: var(--text-secondary);
-    margin-bottom: 20px;
 }
 
 .detail-specs {
@@ -363,18 +317,6 @@ form {
     margin-bottom: 20px;
 }
 
-.price-summary h3 {
-    margin-top: 0;
-    font-size: 1.1em;
-}
-
-.price-summary p {
-    display: flex;
-    justify-content: space-between;
-    margin: 5px 0;
-    color: var(--text-secondary);
-}
-
 .price-summary .total-price {
     color: var(--primary-red);
     font-weight: 700;
@@ -384,41 +326,7 @@ form {
     margin-top: 10px;
 }
 
-.caution {
-    margin-top: 10px;
-    font-size: 0.85em;
-    color: #FFCC00;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-
-/* Checkout */
-.checkout-summary {
-    background-color: var(--dark-card);
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-.checkout-summary p {
-    margin: 8px 0;
-    color: var(--text-light);
-}
-
-.checkout-summary .price {
-    color: var(--primary-red);
-    font-weight: bold;
-}
-
-
 /* Perfil & Menu */
-.profile-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
 .avatar {
     width: 100px;
     height: 100px;
@@ -430,10 +338,6 @@ form {
 .profile-menu {
     list-style: none;
     padding: 0;
-}
-
-.profile-menu li {
-    margin-bottom: 15px;
 }
 
 .profile-menu button {
@@ -449,17 +353,11 @@ form {
     display: flex;
     align-items: center;
     gap: 15px;
-    transition: background-color 0.2s;
-}
-
-.profile-menu button:hover {
-    background-color: #333333;
 }
 
 .logout-btn {
     color: #FF4444 !important;
 }
-
 
 /* Verificação */
 .progress-bar {
@@ -467,17 +365,6 @@ form {
     justify-content: space-between;
     margin-bottom: 30px;
     padding: 0 10px;
-}
-
-.step {
-    font-size: 0.8em;
-    color: var(--text-secondary);
-    position: relative;
-}
-
-.step.active {
-    color: var(--primary-red);
-    font-weight: bold;
 }
 
 .upload-area {
@@ -491,17 +378,6 @@ form {
     border-radius: 12px;
     padding: 20px;
     text-align: center;
-    transition: border-color 0.2s;
-}
-
-.upload-card:hover {
-    border-color: var(--primary-red);
-}
-
-.upload-card i {
-    font-size: 2em;
-    color: var(--text-secondary);
-    margin-bottom: 10px;
 }
 
 .alert-message {
@@ -524,13 +400,6 @@ form {
     margin-bottom: 25px;
 }
 
-.dash-card {
-    flex: 1;
-    padding: 15px;
-    border-radius: 12px;
-    text-align: center;
-}
-
 .dash-card.primary {
     background-color: var(--primary-red);
     color: var(--text-light);
@@ -540,62 +409,6 @@ form {
     background-color: #FFFFFF;
     color: var(--dark-background);
 }
-
-.dash-card h3 {
-    font-size: 2em;
-    margin: 5px 0;
-}
-
-.vehicle-list-small {
-    display: grid;
-    gap: 10px;
-}
-
-.vehicle-card-small {
-    background-color: var(--dark-card);
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 10px;
-    border-radius: 8px;
-}
-
-.vehicle-card-small img {
-    border-radius: 5px;
-    width: 100px;
-    height: 70px;
-    object-fit: cover;
-}
-
-.vehicle-card-small h3 {
-    font-size: 1em;
-    margin: 0;
-}
-
-.status-active {
-    color: #00FF00;
-    font-size: 0.8em;
-}
-
-.recent-bookings {
-    display: grid;
-    gap: 10px;
-}
-
-.booking-item {
-    background-color: var(--dark-card);
-    padding: 15px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.9em;
-}
-
-.status-pending { color: #FFCC00; }
-.status-confirmed { color: #00FF00; }
-.status-completed { color: var(--text-secondary); }
-
 
 /* Bottom Nav (Mobile) */
 .bottom-nav {
@@ -659,43 +472,68 @@ form {
 /* ------------------------------------------- */
 @media (min-width: 900px) {
     
-    /* Configuração para simular um "Desktop App" */
+    /* Configuração Geral do Container */
     body {
         padding: 50px;
     }
 
     #app-container {
         width: 1200px; 
-        height: 90vh; /* Altura fixada para visualização de PC */
+        height: 90vh;
         max-height: 1000px;
         border-radius: 15px;
         box-shadow: 0 10px 40px var(--shadow-color);
-        padding-bottom: 0; /* Remove padding extra de mobile */
+        padding-bottom: 0;
     }
     
-    /* Oculta a navegação inferior (apenas para mobile) */
+    /* Oculta a navegação inferior */
     .bottom-nav {
         display: none;
     }
     
     .top-nav {
-        padding: 15px 40px; /* Mais espaço nas laterais */
+        padding: 15px 40px;
+    }
+
+    /* Centralização de Login e Cadastro no PC (Card Limpo) */
+    #login-screen,
+    #signup-screen {
+        justify-content: center; 
+        align-items: center; 
+        text-align: center;
+    }
+    
+    /* Oculta o header completo para um visual limpo no PC */
+    #login-screen header,
+    #signup-screen header {
+        display: none; 
+    }
+
+    /* Estiliza o formulário como um Card Centralizado */
+    #login-screen main,
+    #signup-screen main {
+        max-width: 350px; 
+        padding: 40px;
+        background-color: var(--dark-card);
+        border-radius: 12px;
+        box-shadow: 0 4px 20px var(--shadow-color);
+        margin: 0; 
     }
 
     /* Listagem de Veículos (Grid) */
     .vehicle-list {
-        grid-template-columns: repeat(3, 1fr); /* 3 colunas para PCs */
+        grid-template-columns: repeat(3, 1fr); 
         gap: 30px;
     }
-
-    /* Mais de 3 colunas para telas muito largas */
+    
+    /* Mais colunas para telas muito largas */
     @media (min-width: 1300px) {
         .vehicle-list {
             grid-template-columns: repeat(4, 1fr); 
         }
     }
     
-    /* Painel do Locador (Melhor distribuição) */
+    /* Painel do Locador */
     .dashboard-cards {
         gap: 30px;
     }
